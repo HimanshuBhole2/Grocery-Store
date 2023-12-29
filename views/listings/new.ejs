@@ -1,0 +1,37 @@
+<%layout("layouts/boilerplate") -%>
+
+<body>
+    <h1>Add New Listing Here</h1>
+
+    <form action="/listings" method="post">
+
+        <div>
+            <label for="title">Title Here : </label>
+            <input type="text" name="listing[title]" id="">
+        </div>
+
+        <div>
+            <label for="description">Description Here : </label>
+            <textarea name="listing[description]" id="description" cols="30" rows="10"></textarea>
+        </div>
+
+        <div>
+            <label for="image">Image Url Here : </label>
+            <input type="text" name="listing[image]" id="image">
+        </div>
+
+        <div>
+            <label for="price">Add Price Here : </label>
+            <input type="number" name="listing[price]" id="price">
+        </div>
+
+        <div>
+            <label for="rating">Add Rating Here : </label>
+            <input type="number" name="listing[rating]" id="rating">
+        </div>
+
+        <button type="submit">Add Item</button>
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<% layout("/layouts/boilerplate")-%>
+<body>
+    <h1>Update Listing Here</h1>
+
+    <form action="/listings/<%=listing._id%>?_method=Put" method="post">
+
+        <div>
+            <label for="title">Title Here : </label>
+            <input type="text" name="listing[title]" value="<%=listing.title%>" id="">
+        </div>
+
+        <div>
+            <label for="description">Description Here : </label>
+            <textarea name="listing[description]" id="description" cols="30" rows="10"><%=listing.description%></textarea>
+        </div>
+
+        <div>
+            <label for="image">Image Url Here : </label>
+            <input type="text" name="listing[image]" value="<%=listing.image%>" id="image">
+        </div>
+
+        <div>
+            <label for="price">Add Price Here : </label>
+            <input type="number" name="listing[price]" value="<%=listing.price%>" id="price">
+        </div>
+
+        <div>
+            <label for="rating">Add rating Here : </label>
+            <input type="number" name="listing[rating]" value="<%=listing.rating%>" id="rating">
+        </div>
+
+        <button type="submit">Update Details</button>
+
+    </form>
+    
+
+</body>

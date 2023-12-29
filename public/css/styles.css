@@ -1,0 +1,62 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: aqua;
+}
+nav{
+    height: 5rem !important;
+}
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flexbox !important;
+    flex-direction: column ;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+
+}
+
+/* Card Listings */
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem 0.8rem;
+}
+
+.card a{
+    text-decoration: none;
+    color:#000;
+}
+
+.card-img-top{
+    border-radius: 1rem !important;
+    object-fit: cover !important;
+    width: 100% !important;
+}
+
+
+.card-body{
+    padding: 1.2rem 0 !important;
+}
+
+.list_card:hover{
+    padding: 6px;
+    border-radius: 10px;
+    transform: scale(1.05);
+ box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+
+/* Show Here */
+
+.show-card{
+    padding:2.5rem;
+}
+

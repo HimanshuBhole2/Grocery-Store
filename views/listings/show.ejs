@@ -1,0 +1,31 @@
+<% layout("layouts/boilerplate") -%>
+
+   <div class="row">
+    <div class="col-8 offset-2">
+
+        <div class="card">
+            <p>hello</p>
+        </div>
+
+
+    </div>
+   </div>
+
+
+
+
+
+
+    <h1>This is show </h1>
+    <h1><%=listing.title%></h1>
+    <p><%=listing.description%></p>
+    <p><%=listing.rating%></p>
+    <p><%=listing.price%></p>
+    <a href="/listings"><button>Back</button></a> <br>
+
+    <a href="/listings/<%=listing._id%>/edit"><button>Edit</button></a> <br>
+
+    <form action="/listings/<%=listing._id%>?_method=Delete" method="post">
+        <button type="submit">Delete</button>
+    </form>
+</html>
