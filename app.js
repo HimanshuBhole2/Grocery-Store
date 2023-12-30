@@ -7,7 +7,8 @@ const ejsMate = require("ejs-mate");
 const ListingModel = require("./models/listing");
 const ExpressError = require("./util/expressError");
 const wrapAsync = require("./util/wrapAsync");
-
+const {listingSchema} =require("./schema.js");
+const Joi = require("joi")
 
 
 const app = express();
@@ -27,6 +28,17 @@ main().then(()=>{
 async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/shopgrocery');
 }
+
+const validateListing = (req,res,next)=>{
+    let{error} = listingSchema.validate(req.body);
+    if(error){
+        throw new ExpressError(400,error);
+    }else{
+        next();
+    }
+}
+
+
 
 // Listing field
 
@@ -51,7 +63,7 @@ app.get("/listings/new",(req,res)=>{
     res.render("listings/new.ejs");
 })
 
-app.post("/listings",wrapAsync(async (req,res,next)=>{
+app.post("/listings",validateListing,wrapAsync(async (req,res,next)=>{
 
     let listing1 = new ListingModel(req.body.listing)
     await listing1.save();
