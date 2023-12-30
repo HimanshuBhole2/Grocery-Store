@@ -9,35 +9,76 @@
    
       <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title"  name="listing[title]" value="<%=listing.title%>" placeholder="Enter title">
+        <input type="text" class="form-control" id="title"  name="listing[title]" value="<%=listing.title%>" placeholder="Enter title" required>
+
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+
+      <div class="invalid-feedback">
+          Please give leagle title.
+      </div>
+
+
       </div>
     </div>
 
     <div class="col-12">
       <div class="form-group">
         <label for="image">Image Url</label>
-        <input type="text" class="form-control"  name="listing[image]" value="<%=listing.image%>" id="image"  placeholder="Enter Image Url">
+        <input type="text" class="form-control"  name="listing[image]" value="<%=listing.image%>" id="image"  placeholder="Enter Image Url" required>
+
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+
+      <div class="invalid-feedback">
+          Please enter valid URL.
+      </div>
       </div>
     </div>
 
     <div class="col-12">
       <div class="form-group">
         <label for="description">Product Description</label>
-        <textarea name="listing[description]" class="form-control" id="description" rows="3"> <%=listing.description%></textarea>
+        <textarea name="listing[description]" class="form-control" id="description" rows="3" required> <%=listing.description%></textarea>
+
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+
+      <div class="invalid-feedback">
+          Please enter description of product.
+      </div>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="form-group">
         <label for="rating">Rating</label>
-        <input type="number" name="listing[rating]" value="<%=listing.rating%>" class="form-control" id="rating"  placeholder="Enter Image Url">
+        <input type="number" max=5 min=0 name="listing[rating]" value="<%=listing.rating%>" class="form-control" id="rating"  placeholder="Enter Image Url" required>
+
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+
+      <div class="invalid-feedback">
+          Please give rating of product.
+      </div>
       </div>
     </div>
 
     <div class="col-md-8">
       <div class="form-group">
         <label for="price">Price</label>
-        <input type="number" name="listing[price]" value="<%=listing.price%>"  class="form-control" id="price"  placeholder="Enter Price">
+        <input type="number" name="listing[price]" value="<%=listing.price%>"  class="form-control" id="price"  placeholder="Enter Price" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+
+      <div class="invalid-feedback">
+          Please give price of product.
+      </div>
       </div>
     </div>
 
