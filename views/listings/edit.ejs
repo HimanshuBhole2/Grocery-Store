@@ -1,37 +1,59 @@
 <% layout("/layouts/boilerplate")-%>
 <body>
-    <h1>Update Listing Here</h1>
+<br>
+ <div class="row">
+    <div class="card col-8 offset-2">
+    <form action="/listings/<%=listing._id%>?_method=Put" method="post" class="row g-3 needs-validation" novalidate>
+        <h3>Edit the list</h3>
+    <div class="col-12">
+   
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title"  name="listing[title]" value="<%=listing.title%>" placeholder="Enter title">
+      </div>
+    </div>
 
-    <form action="/listings/<%=listing._id%>?_method=Put" method="post">
+    <div class="col-12">
+      <div class="form-group">
+        <label for="image">Image Url</label>
+        <input type="text" class="form-control"  name="listing[image]" value="<%=listing.image%>" id="image"  placeholder="Enter Image Url">
+      </div>
+    </div>
 
-        <div>
-            <label for="title">Title Here : </label>
-            <input type="text" name="listing[title]" value="<%=listing.title%>" id="">
-        </div>
+    <div class="col-12">
+      <div class="form-group">
+        <label for="description">Product Description</label>
+        <textarea name="listing[description]" class="form-control" id="description" rows="3"> <%=listing.description%></textarea>
+      </div>
+    </div>
 
-        <div>
-            <label for="description">Description Here : </label>
-            <textarea name="listing[description]" id="description" cols="30" rows="10"><%=listing.description%></textarea>
-        </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <input type="number" name="listing[rating]" value="<%=listing.rating%>" class="form-control" id="rating"  placeholder="Enter Image Url">
+      </div>
+    </div>
 
-        <div>
-            <label for="image">Image Url Here : </label>
-            <input type="text" name="listing[image]" value="<%=listing.image%>" id="image">
-        </div>
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" name="listing[price]" value="<%=listing.price%>"  class="form-control" id="price"  placeholder="Enter Price">
+      </div>
+    </div>
 
-        <div>
-            <label for="price">Add Price Here : </label>
-            <input type="number" name="listing[price]" value="<%=listing.price%>" id="price">
-        </div>
+    <div class="col-md-6">
+        <button type="submit" class="button btn btn-dark">Update Details</button>
+    </div>
 
-        <div>
-            <label for="rating">Add rating Here : </label>
-            <input type="number" name="listing[rating]" value="<%=listing.rating%>" id="rating">
-        </div>
-
-        <button type="submit">Update Details</button>
-
-    </form>
     
+  </form>
+
+
+    <div class="col-md-6 mt-2">
+        <a href="/listings/<%=listing._id%>/show"><button class="button btn  btn-dark"> Cancal</button></a>
+    </div>
+
+    </div>
+ </div> 
 
 </body>

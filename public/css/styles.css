@@ -1,32 +1,36 @@
 *{
-    margin:0;
-    padding: 0;
+    margin:0px;
+    padding: 0px;
     box-sizing: border-box;
 }
 body{
+    margin:0;
+    padding: 0;
     background-color: aqua;
 }
+
 nav{
     height: 5rem !important;
 }
 .container{
-    width: 100vw;
+    width: 100% !important;
     height: 100vh;
     display: flexbox !important;
     flex-direction: column ;
     justify-content: center !important;
     align-items: center !important;
-    text-align: center !important;
+}
 
+.row{
+    margin:0;
+    padding: 0;
+    width: 100%;
 }
 
 /* Card Listings */
 .card{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     padding: 1rem 0.8rem;
 }
 
@@ -45,7 +49,11 @@ nav{
 .card-body{
     padding: 1.2rem 0 !important;
 }
-
+.list_card{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 .list_card:hover{
     padding: 6px;
     border-radius: 10px;
@@ -60,3 +68,6 @@ nav{
     padding:2.5rem;
 }
 
+.actions-buttons a,.actions-buttons form {
+    margin: 1rem 1rem;
+}

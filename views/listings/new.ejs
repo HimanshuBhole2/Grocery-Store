@@ -1,37 +1,63 @@
 <%layout("layouts/boilerplate") -%>
 
 <body>
-    <h1>Add New Listing Here</h1>
-
-    <form action="/listings" method="post">
-
-        <div>
-            <label for="title">Title Here : </label>
-            <input type="text" name="listing[title]" id="">
+    <br>
+    <div class="row">
+        <div class="card col-8 offset-2">
+        <form action="/listings" method="POST" novalidate class="row g-3 needs-validation">
+            <h3>Add New Item</h3>
+        <div class="col-12">
+       
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title"  name="listing[title]" placeholder="Enter title" required>
+            <div class="invalid-feedback">
+                Please choose a username.
+              </div>
+          </div>
         </div>
-
-        <div>
-            <label for="description">Description Here : </label>
-            <textarea name="listing[description]" id="description" cols="30" rows="10"></textarea>
+    
+        <div class="col-12">
+          <div class="form-group">
+            <label for="image">Image Url</label>
+            <input type="text" class="form-control"  name="listing[image]"  id="image"  placeholder="Enter Image Url">
+          </div>
         </div>
-
-        <div>
-            <label for="image">Image Url Here : </label>
-            <input type="text" name="listing[image]" id="image">
+    
+        <div class="col-12">
+          <div class="form-group">
+            <label for="description">Product Description</label>
+            <textarea name="listing[description]" class="form-control" id="description" rows="3" required></textarea>
+          </div>
         </div>
-
-        <div>
-            <label for="price">Add Price Here : </label>
-            <input type="number" name="listing[price]" id="price">
+    
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="rating">Rating</label>
+            <input type="number" name="listing[rating]" class="form-control" id="rating"  placeholder="Enter Rating" required>
+          </div>
         </div>
-
-        <div>
-            <label for="rating">Add Rating Here : </label>
-            <input type="number" name="listing[rating]" id="rating">
+    
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" name="listing[price]" class="form-control" id="price"  placeholder="Enter Price" required>
+          </div>
         </div>
-
-        <button type="submit">Add Item</button>
-
+    
+        <div class="col-md-6">
+            <button type="submit" class="button btn btn-dark">Add Item</button>
+        </div>
     </form>
+        <div class="col-md-6 mt-2" >
+                <a href="/listings">
+                <button class="button btn  btn-dark"> Cancal</button>
+                </a>
+        </div>
+        </div>
+     </div> 
+    
+
+
 </body>
 </html>

@@ -1,12 +1,13 @@
 <% layout("/layouts/boilerplate")-%>
-
+    <body>
+        
     <br><br>
     <div class="row ">
     <%for(let listing of listings) {%>
     
-        <div class="card ms-3 me-3 mb-3 list_card col-lg-3 col-md-3 col-sm-1" style="width: 18rem;">
+        <div class="card ms-3 me-3 mb-3 list_card col-lg-3 col-md-3 col-sm-1" style="width: 20rem;">
             <a href="/listings/<%= listing._id %>/show">
-                    <img class="card-img-top" src="<%=listing.image%>" height="300px" width="300px" alt="Card image cap">
+                    <img class="card-img-top" src="<%=listing.image%>" height="350px" width="300px" alt="Card image cap">
                 <div class="card-body d-flex flex-column">
                     <p class="card-text mt-auto">
                         <b><%=listing.title%></b><br>
@@ -19,3 +20,5 @@
     <%}%>
 
     </div>
+
+    </body>
