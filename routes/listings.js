@@ -4,6 +4,8 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/expressError.js");
 const {listingSchema} = require("../schema.js");
 const ListingModel = require("../models/listing.js");
+const ReviewModel = require("../models/review.js");
+
 
 const validateListing = (req,res,next)=>{
     let{error} = listingSchema.validate(req.body);
@@ -26,7 +28,7 @@ router.get("/",async (req,res)=>{
 // Show the grocery
 router.get("/:id/show",wrapAsync(async (req,res,next)=>{
     let {id} = req.params;
-    let listing =await ListingModel.findById(id);
+    let listing =await ListingModel.findById(id).populate("reviews");
     if(!listing){
         throw new ExpressError(404,"Page NOt Exist");
     }
