@@ -5,16 +5,7 @@ const ExpressError = require("../utils/expressError.js");
 const {listingSchema} = require("../schema.js");
 const ListingModel = require("../models/listing.js");
 const ReviewModel = require("../models/review.js");
-
-
-const validateListing = (req,res,next)=>{
-    let{error} = listingSchema.validate(req.body);
-    if(error){
-        throw new ExpressError(400,error);
-    }else{
-        next();
-    }
-}
+const {validateReview,validateListing }= require("../middlewares.js");
 
 
 

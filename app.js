@@ -4,14 +4,9 @@ const mongoose = require("mongoose");
 const exp = require("constants");
 const methodeOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const ListingModel = require("./models/listing");
-const ReviewModel = require("./models/review.js")
-const ExpressError = require("./utils/expressError.js");
-const listingRouter = require("./routes/listings.js");
-const wrapAsync = require("./utils/wrapAsync.js");
-const {listingSchema, reviewSchema} =require("./schema.js");
-const Joi = require("joi")
 
+const listingRouter = require("./routes/listings.js");
+const reviewRouter = require("./routes/reviews.js");
 
 const app = express();
 app.set("view engine","ejs");
@@ -32,42 +27,12 @@ async function main() {
 }
 
 
-
+// All Routers site
 app.use("/listings",listingRouter)
+app.use("/listings/:id/review",reviewRouter);
 
+// const {validateReview} = require("./middlewares.js");
 
-const validateReview = (req,res,next)=>{
-    let {error} =  reviewSchema.validate(req.body);
-    if(error){
-        throw new ExpressError(400,error);
-    }else{
-        next();
-    }
-}
-
-
-
-// Add Review
-app.delete("/listings/:id/review/:reviewId",async(req,res)=>{
-    let{id,reviewId}= req.params;
-    await ListingModel.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
-    await ReviewModel.findByIdAndDelete(reviewId);
-    res.redirect(`/listings/${id}/show`);
-
-})
-
-
-app.post("/listings/:id/review",validateReview ,async(req,res)=>{
-    let {id} = req.params;
-   let review1 = new ReviewModel(req.body.review);
-   await review1.save();
-   let listing1 =await ListingModel.findById(id).populate("reviews");
-    listing1.reviews.push(review1);
-    await listing1.save();
-    console.log(listing1.reviews[0]);
-    
-   return res.redirect(`/listings/${listing1._id}/show`);
-})
 
 
 // Home Route
@@ -81,7 +46,6 @@ app.get("/",(req,res)=>{
 app.use((err,req,res,next)=>{
     let{statusCode = 500,message="Error Not Found"} =err;
     res.status(statusCode).render("listings/error.ejs",{message});
-
 })
 
 app.listen(8000,(req,res)=>{
