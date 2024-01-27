@@ -2,11 +2,8 @@ const express = require("express")
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/expressError.js");
-const {listingSchema} = require("../schema.js");
 const ListingModel = require("../models/listing.js");
-const ReviewModel = require("../models/review.js");
 const {validateReview,validateListing }= require("../middlewares.js");
-
 
 
 // Listing field
@@ -36,6 +33,7 @@ router.post("/",validateListing,wrapAsync(async (req,res,next)=>{
 
     let listing1 = new ListingModel(req.body.listing)
     await listing1.save();
+    req.flash('success',"Listing Updated Successfully");
     res.redirect("/listings");
 }))
 
@@ -53,6 +51,7 @@ router.get("/:id/edit",wrapAsync(async(req,res,next)=>{
 router.put("/:id",wrapAsync(async(req,res)=>{
     let {id} = req.params;
     await ListingModel.findByIdAndUpdate(id,{...req.body.listing})
+    req.flash("success","List Updated Successfully");
     res.redirect(`/listings/${id}/show`);
 }))
 
@@ -60,6 +59,7 @@ router.put("/:id",wrapAsync(async(req,res)=>{
 router.delete("/:id",wrapAsync(async (req,res)=>{
     let {id} = req.params;
     await ListingModel.findByIdAndDelete(id);
+    req.flash("success","list is Deleted Successfully");
     res.redirect("/listings");
 }))
 

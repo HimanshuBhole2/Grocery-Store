@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const exp = require("constants");
 const methodeOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+const flash = require('connect-flash');
+const session = require("express-session");
+
 
 const listingRouter = require("./routes/listings.js");
 const reviewRouter = require("./routes/reviews.js");
@@ -15,6 +18,22 @@ app.use(express.static(path.join(__dirname,"/public")));
 app.use(express.urlencoded({extended:true}));
 app.use(methodeOverride("_method"));
 app.engine("ejs",ejsMate)
+
+// Session is set
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }  // Change this to false if not using HTTPS
+  }))
+app.use(flash());
+app.use((req,res,next)=>{
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    next();
+})
+
+
 
 main().then(()=>{
     console.log("Mongo Connection establised");
@@ -31,7 +50,6 @@ async function main() {
 app.use("/listings",listingRouter)
 app.use("/listings/:id/review",reviewRouter);
 
-// const {validateReview} = require("./middlewares.js");
 
 
 
