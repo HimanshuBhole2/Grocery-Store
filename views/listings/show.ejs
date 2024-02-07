@@ -13,7 +13,9 @@
             <p><%=listing.rating%> <i class="fa-solid sm fa-star" style="color: rgb(193, 185, 21);"></i> / 5 <i class="fa-solid sm fa-star" style="color: rgb(255, 242, 0);"></i> </p><br>
             <h5>Price : </h5>
             <p> &#8377; <%=listing.price.toLocaleString('en-in')%>   only</p>
-
+            
+            <%if(currUser) {%>
+               
             <div class="row show-card">
 
             <a href="/listings" class="col-md-3 col-sm-12 mb-3 mt-3"><button type="button" class="btn btn-dark">Buy Now</button></a>
@@ -27,7 +29,7 @@
             <a href="/listings" class="col-md-3 col-sm-12 mb-3 mt-3"><button type="button" class="btn btn-dark">Back</button></a>
 
             </div>
-
+            <%}%>
             <hr>
             
             <h4><b>Leave An Review</b></h4>

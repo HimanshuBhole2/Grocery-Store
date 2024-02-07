@@ -20,6 +20,24 @@
               </li>
               
             </ul>
+
+            <ul class="navbar-nav ms-auto">
+              <%if(!currUser) {%>
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/signIn">SignUp</a>
+              </li>
+              <%}%>
+
+              <%if(currUser) {%>
+              <li class="nav-item">
+                <a class="nav-link" href="/logOut">LogOut</a>
+              </li>
+              <%}%>
+            </ul>
           </div>
 
 </nav>

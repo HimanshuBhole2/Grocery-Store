@@ -4,7 +4,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/expressError.js");
 const ListingModel = require("../models/listing.js");
 const {validateReview,validateListing }= require("../middlewares.js");
-
+// const flash = require("connect-flash");
 
 // Listing field
 
