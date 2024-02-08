@@ -16,7 +16,9 @@ router.get("/",async (req,res)=>{
 // Show the grocery
 router.get("/:id/show",wrapAsync(async (req,res,next)=>{
     let {id} = req.params;
-    let listing =await ListingModel.findById(id).populate("reviews");
+    let listing =await ListingModel.findById(id).populate({path:"reviews",populate:{
+        path:"author"
+    }}).populate("owner");
     if(!listing){
         throw new ExpressError(404,"Page NOt Exist");
     }
@@ -31,7 +33,8 @@ router.get("/new",(req,res)=>{
 
 router.post("/",validateListing,wrapAsync(async (req,res,next)=>{
 
-    let listing1 = new ListingModel(req.body.listing)
+    let listing1 = new ListingModel(req.body.listing);
+    listing1.user = req.user;
     await listing1.save();
     req.flash('success',"Listing Updated Successfully");
     res.redirect("/listings");

@@ -1,4 +1,4 @@
-module.exports =  [
+sampleListings =  [
     {
         "title": "Apple",
         "description": "Fresh and delicious red apples, handpicked from the orchard. Perfectly ripe, crisp, and juicy apples that are ideal for snacking, baking pies, or making homemade applesauce.",
@@ -105,4 +105,5 @@ module.exports =  [
         "rating": 4.5
       }
       ]
-  
+
+module.exports = { data: sampleListings };

@@ -17,6 +17,7 @@ router.delete("/:reviewId",async(req,res)=>{
 router.post("/",validateReview ,async(req,res)=>{
         let {id} = req.params;
        let review1 = new ReviewModel(req.body.review);
+       review1.author= req.user;
        await review1.save();
        let listing1 =await ListingModel.findById(id).populate("reviews");
         listing1.reviews.push(review1);

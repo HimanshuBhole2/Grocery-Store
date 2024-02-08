@@ -10,6 +10,7 @@ const passport = require("passport")
 const LocalStrategy = require("passport-local");
 
 const listingRouter = require("./routes/listings.js");
+const userRouter = require("./routes/users.js");
 const reviewRouter = require("./routes/reviews.js");
 const isRedirectUrl = require("./middlewares.js")
 
@@ -69,55 +70,7 @@ async function main() {
 // All Routers site
 app.use("/listings",listingRouter)
 app.use("/listings/:id/review",reviewRouter);
-
-
-app.get("/login",(req,res)=>{
-    res.render("users/login.ejs");
-})
-
-app.post(
-    "/login",
-    passport.authenticate("local",
-    {failureRedirect:"/login",failureFlash:true})
-    , async (req,res)=>{
-        req.flash("success","LogIn Successfully.");
-        let redirectUrl = res.locals.redirectUrl || "/listings"
-    res.redirect(redirectUrl);
-    })
-
-app.get("/signIn",(req,res)=>{
-    res.render("users/signIn")
-})
-
-app.post("/signIn",async(req,res)=>{
-    let{userName,email,password} = req.body;
-    console.log(userName, email, password);
-    let user1 = new User({
-        email:email,
-        username:userName
-    })
-    let registerdUser = await User.register(user1,password);
-    req.login(registerdUser,(err)=>{
-        if(err){
-            return(next(err))
-        }
-        else{
-            req.flash("success","Welcome to WonderLust. ");
-           return  res.redirect("/listings")
-        }
-    })
-})
-
-app.get("/logOut",(req,res)=>{
-    req.logOut((err)=>{
-        if(err){
-            return next(err);
-        }
-        req.flash("success","Loggout successfully");
-        return res.redirect("/listings");
-    })
-})
-
+app.use("/",userRouter);
 
 
 // Home Route
@@ -127,7 +80,6 @@ app.get("/",(req,res)=>{
 })
 
 // error Middleware
-
 app.use((err,req,res,next)=>{
     let{statusCode = 500,message="Error Not Found"} =err;
     res.status(statusCode).render("listings/error.ejs",{message});
