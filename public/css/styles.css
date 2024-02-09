@@ -122,8 +122,29 @@ footer{
 /* Show Here */
 .show-card{
     padding:2.5rem;
+    width: 100%;
 }
 
 .actions-buttons a,.actions-buttons form {
     margin: 1rem 1rem;
+}
+
+.bt-row1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid black; */
+    width: 100%;
+}
+.bt-row1 a,.bt-row1 form{
+    /* border:2px solid magenta; */
+    width: 50% !important;
+    margin: 0.3rem 0.2rem !important;
+    /* margin: 0 !important; */
+}
+
+.bt-row1 a .btn,.bt-row1 form .btn{
+    
+    width: 100% !important;
+   
 }

@@ -17,17 +17,23 @@
             <%if(currUser) {%>
                
             <div class="row show-card">
-
+            <div class="bt-row1">
             <a href="/listings" class="col-md-3 col-sm-12 mb-3 mt-3"><button type="button" class="btn btn-dark">Buy Now</button></a>
+            <a href="/listings" class="col-md-3 col-sm-12 mb-3 mt-3"><button type="button" class="btn btn-dark">Back</button></a>
+         </div>
+
+        <div class="bt-row1">
             <%if(currUser&& currUser._id.equals(listing.owner._id)) {%>
             <a href="/listings/<%=listing._id%>/edit" class="col-md-3 col-sm-12 mb-3 mt-3 "><button  type="button" class="btn btn-dark">Edit</button></a> <br>
-        
+    
+
+            
             <form action="/listings/<%=listing._id%>?_method=Delete" method="post" class="col-md-3 col-sm-12 mb-3 mt-3">
                 <button type="submit" type="button" class="btn btn-dark">Delete</button>
             </form>
             <%}%>
-            <a href="/listings" class="col-md-3 col-sm-12 mb-3 mt-3"><button type="button" class="btn btn-dark">Back</button></a>
-
+           
+        </div>
             </div>
             <%}%>
             <hr>

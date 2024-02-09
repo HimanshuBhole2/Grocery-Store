@@ -3,7 +3,7 @@ const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/expressError.js");
 const ListingModel = require("../models/listing.js");
-const {validateReview,validateListing }= require("../middlewares.js");
+const {validateReview,validateListing, isLoggedIn, isRedirectUrl }= require("../middlewares.js");
 // const flash = require("connect-flash");
 
 // Listing field
@@ -27,7 +27,7 @@ router.get("/:id/show",wrapAsync(async (req,res,next)=>{
 
 
 // Add New Listings
-router.get("/new",(req,res)=>{
+router.get("/new",isLoggedIn,(req,res)=>{
     res.render("listings/new.ejs");
 })
 
