@@ -1,0 +1,43 @@
+<% layout("/layouts/boilerplate")-%>
+
+<body>
+    <div class="row" onclick="getsum()">
+        <div class="card col-8 offset-2 order-card " >
+            <h3>My Orders</h3>
+
+            <div class="ex3">
+            <%for(order of orders){%>
+                <div class="card card-order col-5 ms-3 mb-3 pb-3" >
+                    <div class="left-side">
+                        <p><b><%=order.title%></b><p>
+                        <p>Price :&#8377; <%=order.price.toLocaleString('en-in')%></p>
+                        <p>Rating: <%=order.rating%>⭐/5.0⭐</p>
+                    </div>
+                    <div class="right-side">
+                        <img src="<%=order.image%>" class="original-image" alt="image" srcset="">
+                    </div>
+
+                    <hr>
+                </div>
+            <%}%>
+            </div>
+
+            <h2 class="total-title">Total : &#8377;<span id="total-price">0.0</span></h2>
+
+        </div>
+    </div>
+
+    <script>
+        const orderList = <%-JSON.stringify(orders)%>;
+        let total = document.getElementById("total-price");
+     let totalPrice = 0
+            for(let order of orderList){
+                totalPrice+=order.price
+            }
+            console.log(totalPrice);
+            // total.innerText = "";
+         total.innerText =  totalPrice.toLocaleString('en-in');
+     </script>
+    <!-- <script>console.log(orderList)</script>
+    <script src="/js/order.js"></script> -->
+</body>

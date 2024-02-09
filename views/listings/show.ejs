@@ -14,11 +14,15 @@
             <h5>Price : </h5>
             <p> &#8377; <%=listing.price.toLocaleString('en-in')%>   only</p>
             <p><b>User : </b> <%=listing.owner.username%></p>
-            <%if(currUser) {%>
+
                
             <div class="row show-card">
             <div class="bt-row1">
-            <a href="/listings" class="col-md-3 col-sm-12 mb-3 mt-3"><button type="button" class="btn btn-dark">Buy Now</button></a>
+
+                <form action="/listings/<%=listing._id%>/buynow" method="POST" class="col-md-3 col-sm-12 mb-3 mt-3">
+                    <button type="submit" type="button" class="btn btn-dark">BuyNow</button>
+                </form>
+
             <a href="/listings" class="col-md-3 col-sm-12 mb-3 mt-3"><button type="button" class="btn btn-dark">Back</button></a>
          </div>
 
@@ -35,7 +39,6 @@
            
         </div>
             </div>
-            <%}%>
             <hr>
             <%if(currUser){%>
             <h4><b>Leave An Review</b></h4>
@@ -69,12 +72,10 @@
                             <p class="card-text"><%=review.comment%></p>
                             <p class="card-text"><%=review.rating%></p>
                         </div>
-                       <% if(currUser && currUser._id.equals(review.author._id)){%>
+                       
                          <form action="/listings/<%=listing.id%>/review/<%=review.id%>?_method=Delete" method="POST">
                             <button class="btn btn-sm btn-dark">Delete</button>
                         </form>
-                        <%}%>
-
                         
 
                     </div>

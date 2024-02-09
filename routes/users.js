@@ -3,7 +3,7 @@ const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/expressError.js");
 const ListingModel = require("../models/listing.js");
-const {validateReview,validateListing,isRedirectUrl }= require("../middlewares.js");
+const {validateReview,validateListing,isRedirectUrl, isLoggedIn }= require("../middlewares.js");
 const passport = require("passport")
 const User = require("../models/user.js")
 
@@ -19,7 +19,7 @@ router.route("/login")
     {failureRedirect:"/login",failureFlash:true})
     ,wrapAsync( async (req,res)=>{
         req.flash("success","LogIn Successfully.");
-        let redirectUrl = res.locals.redirectUrl || "/listings"
+        let redirectUrl = res.locals.redirectUrl || "/listings";
     res.redirect(redirectUrl);
     }))
 
@@ -57,5 +57,12 @@ router.get("/logOut",(req,res)=>{
         return res.redirect("/listings");
     })
 })
+
+router.get("/my-orders",isLoggedIn,wrapAsync(async(req,res)=>{
+    let user = await User.findById(res.locals.currUser._id).populate("orders");
+    let orders = user.orders;
+    res.render("users/orders.ejs",{orders})
+    // res.send(orders);
+}))
 
 module.exports = router;
