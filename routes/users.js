@@ -7,62 +7,26 @@ const {validateReview,validateListing,isRedirectUrl, isLoggedIn }= require("../m
 const passport = require("passport")
 const User = require("../models/user.js")
 
+// const UserController = requrie("../controllers/users.js")
+const UserController = require("../controllers/users.js");
 
 router.route("/login")
     // Login render page
-    .get((req,res)=>{
-        res.render("users/login.ejs");
-    })
+    .get(UserController.renderLoginForm)
 
     // Post login
     .post(isRedirectUrl, passport.authenticate("local",
     {failureRedirect:"/login",failureFlash:true})
-    ,wrapAsync( async (req,res)=>{
-        req.flash("success","LogIn Successfully.");
-        let redirectUrl = res.locals.redirectUrl || "/listings";
-    res.redirect(redirectUrl);
-    }))
+    ,wrapAsync(UserController.Login))
 
 router.route("/signIn")
     
-    .get((req,res)=>{
-        res.render("users/signIn")
-    })
+    .get(UserController.renderSignIn)
 
-    .post(wrapAsync(async(req,res)=>{
-            let{username,email,password} = req.body;
-            console.log(username, email, password);
-            let user1 = new User({
-                email:email,
-                username:username
-            })
-            let registerdUser = await User.register(user1,password);
-            req.login(registerdUser,(err)=>{
-                if(err){
-                    return(next(err))
-                }
-                else{
-                    req.flash("success","Welcome to WonderLust. ");
-                return  res.redirect("/listings")
-                }
-            })
-    }))
+    .post(wrapAsync(UserController.signIn))
 
-router.get("/logOut",(req,res)=>{
-    req.logOut((err)=>{
-        if(err){
-            return next(err);
-        }
-        req.flash("success","Loggout successfully");
-        return res.redirect("/listings");
-    })
-})
+router.get("/logOut",UserController.logOut)
 
-router.get("/my-orders",isLoggedIn,wrapAsync(async(req,res)=>{
-    let user = await User.findById(res.locals.currUser._id).populate("orders");
-    let orders = user.orders;
-    res.render("users/orders.ejs",{orders})
-    // res.send(orders);
-}))
+router.get("/my-orders",isLoggedIn,wrapAsync(UserController.myOrders))
 
 module.exports = router;
